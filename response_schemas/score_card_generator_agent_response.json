@@ -1,0 +1,32 @@
+{
+  "agent_name": "Score Card Generator Agent",
+  "agent_id": "6998513bdad6f4a9e9c2df13",
+  "description": "Takes quiz results (topic, score, level name, tagline) and generates a visually stunning glassmorphic score card as a shareable image with cyberpunk aesthetic.",
+  "agent_type": "json",
+  "accessor": "result",
+  "auto_generated": true,
+  "has_module_outputs": true,
+  "response_schema": {
+    "message": "string",
+    "topic": "string",
+    "score": "number",
+    "total": "number",
+    "level_name": "string",
+    "tagline": "string"
+  },
+  "module_outputs_example": {
+    "artifact_files": [
+      {
+        "file_url": "https://example.com/image.png"
+      }
+    ]
+  },
+  "example_response": {
+    "message": "Your NicheNerd score card has been generated! Share it with your friends to show off your IoT Protocols knowledge.",
+    "topic": "IoT Protocols",
+    "score": 7,
+    "total": 10,
+    "level_name": "Nerd Alert",
+    "tagline": "Knows enough to cause mass confusion at dinner parties."
+  }
+}

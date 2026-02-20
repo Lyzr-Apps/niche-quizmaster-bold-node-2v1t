@@ -1,0 +1,28 @@
+{
+  "agent_name": "Quiz Master Agent",
+  "agent_id": "6998513b3c9685c27823bbde",
+  "description": "Conducts an interactive 10-question quiz on the user's chosen niche topic. Asks one question at a time, evaluates answers, tracks score, provides witty feedback per answer, and outputs a final score with a creative level name and tagline.",
+  "agent_type": "json",
+  "accessor": "result",
+  "auto_generated": true,
+  "response_schema": {
+    "message": "string",
+    "question_number": "number",
+    "is_complete": "boolean",
+    "score": "number",
+    "total": "number",
+    "level_name": "string",
+    "tagline": "string",
+    "topic": "string"
+  },
+  "example_response": {
+    "message": "Welcome to NicheNerd! You've chosen IoT Protocols - excellent taste! Let's see how deep your knowledge goes. Here's question 1: What does MQTT stand for?",
+    "question_number": 1,
+    "is_complete": false,
+    "score": 0,
+    "total": 10,
+    "level_name": "",
+    "tagline": "",
+    "topic": "IoT Protocols"
+  }
+}
