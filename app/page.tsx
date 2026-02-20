@@ -373,8 +373,23 @@ export default function Page() {
   const [copied, setCopied] = useState(false)
 
   const sessionId = useRef<string>('')
+  const userId = useRef<string>('')
   const chatEndRef = useRef<HTMLDivElement>(null)
   const msgIdCounter = useRef(0)
+
+  // Initialize a persistent user_id once (survives re-renders, consistent across quiz session)
+  useEffect(() => {
+    const stored = typeof window !== 'undefined' ? sessionStorage.getItem('nichenerd_user_id') : null
+    if (stored) {
+      userId.current = stored
+    } else {
+      const newId = typeof crypto !== 'undefined' && crypto.randomUUID
+        ? `user-${crypto.randomUUID()}`
+        : `user-${Date.now()}`
+      userId.current = newId
+      if (typeof window !== 'undefined') sessionStorage.setItem('nichenerd_user_id', newId)
+    }
+  }, [])
 
   // --- Helpers ---
   const genId = () => {
@@ -408,9 +423,9 @@ export default function Page() {
 
     try {
       const result = await callAIAgent(
-        `Start a quiz on the topic: ${chosenTopic.trim()}`,
+        `Start a quiz on the topic: ${chosenTopic.trim()}. ALL 10 questions MUST be about "${chosenTopic.trim()}" only. Do NOT change the topic.`,
         QUIZ_MASTER_AGENT_ID,
-        { session_id: sessionId.current }
+        { session_id: sessionId.current, user_id: userId.current }
       )
 
       if (result.success) {
@@ -459,7 +474,7 @@ export default function Page() {
       const result = await callAIAgent(
         ans,
         QUIZ_MASTER_AGENT_ID,
-        { session_id: sessionId.current }
+        { session_id: sessionId.current, user_id: userId.current }
       )
 
       if (result.success) {
